@@ -1,4 +1,7 @@
+import { helpers } from "deno-static/mod.ts";
+
 import { Post } from "../data.ts";
+import { paths } from "../paths.ts";
 
 export const PostDetails = ({ post }: { post: Post }) => (
   <div className="post-details">
@@ -16,10 +19,16 @@ export const PostDetails = ({ post }: { post: Post }) => (
   </div>
 );
 
+export const PageNav = () => (
+  <nav className="print-hide">
+    <a href={helpers.url(paths.home())}>
+      <small>⇤ Back</small>
+    </a>
+  </nav>
+);
+
 export const GlobalFooter = () => (
   <footer>
-    <div className="container">
-      <p>🙏</p>
-    </div>
+    <p>🙏</p>
   </footer>
 );

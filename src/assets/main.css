@@ -16,9 +16,30 @@
   --color-text-code: #bf616a;
 }
 
-/* Viewport */
+/* General */
+
+html,
+body {
+  margin: 0;
+}
 
 html {
+  text-rendering: auto;
+  overflow-wrap: break-word;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  background: var(--color-background);
+  color: var(--color-text-main);
+}
+
+body {
+  padding: 2vmax 0;
+  display: grid;
+  grid-template-columns:
+    minmax(1rem, 1fr) [text-start]
+    minmax(auto, 50rem) [text-end]
+    minmax(1rem, 1fr);
+  row-gap: 1rem;
   font-family:
     system-ui,
     -apple-system,
@@ -29,22 +50,40 @@ html {
     sans-serif,
     Apple Color Emoji,
     Segoe UI Emoji;
-  font-size: 1.3rem;
   font-weight: 350;
-  font-size: clamp(18px, 100vw / var(--width), 20px);
+  font-size: clamp(1em, 4vmin, 1.2em);
   line-height: 1.5;
+
+  > * {
+    margin: 0;
+    grid-column: text-start / text-end;
+  }
+
+  > header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+
+    > * {
+      flex-grow: 1;
+      margin: 0;
+    }
+  }
+
+  > footer {
+    display: flex;
+    padding-top: 5rem;
+
+    > * {
+      flex: auto;
+      margin: 0;
+      text-align: center;
+    }
+  }
 }
 
-html,
-body {
-  margin: 0;
-}
-
-/* General */
-
-body {
-  color: var(--color-text-main);
-  background-color: var(--color-background);
+nav a {
+  text-decoration: none;
 }
 
 h1,
@@ -53,23 +92,76 @@ h3,
 h4,
 h5,
 h6 {
-  margin: 0;
-  font-weight: normal;
+  margin-top: 1em;
+  font-weight: inherit;
 
   a[href^="#"] {
     padding: 0 0.25em;
+    text-decoration: none;
+
+    @media print {
+      display: none;
+    }
   }
 }
 
-p {
+header + h2 {
   margin-top: 0;
 }
 
-hr {
-  margin: 2rem 0;
-  color: var(--color-background-off2);
-  border-style: solid;
-  border-width: 1px 0 0 0;
+/* table of contents */
+#contents + ol {
+  a {
+    text-decoration: none;
+  }
+  ol {
+    list-style-type: circle;
+  }
+}
+
+ul,
+ol {
+  padding-left: 2rem;
+
+  ul,
+  ol {
+    margin-top: .5rem;
+    padding-left: 1rem;
+  }
+}
+
+ol {
+  ol {
+    list-style-type: circle;
+  }
+}
+
+li {
+  margin: .5rem 0;
+
+  p {
+    margin: 0;
+  }
+}
+
+blockquote {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  margin: 0.8rem 0;
+  padding: 0.5rem 1rem;
+  color: var(--color-text-weak);
+  border-left: 0.25rem solid var(--color-background-off2);
+
+  @media (min-width: 30em) {
+    padding-right: 5rem;
+    padding-left: 1.25rem;
+  }
+
+  > * {
+    flex-grow: 1;
+    margin: 0;
+  }
 }
 
 a {
@@ -84,53 +176,6 @@ a {
 }
 
 /* Components */
-
-main {
-  > header > .container,
-   > footer > .container,
-   > .content {
-    max-width: 800px;
-    margin: 0 auto;
-
-    @media only screen and (max-width: 830px) {
-      margin: 0 15px;
-    }
-  }
-
-  > header {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-
-    a {
-      text-decoration: none;
-    }
-  }
-
-  > footer {
-    margin-top: 5em;
-    text-align: center;
-    color: var(--color-text-weak);
-  }
-}
-
-.post,
-.page {
-  > header {
-    margin-bottom: 2rem;
-  }
-
-  .post-contents {
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      a[href^="#"] {
-        display: none;
-      }
-    }
-  }
-}
 
 .post-index {
   list-style: none; /** reset ul */
@@ -155,82 +200,6 @@ main {
 
   a {
     text-decoration: none;
-  }
-}
-
-.post-contents {
-  h1 {
-    line-height: 1em;
-    margin-bottom: 0.5rem;
-  }
-
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  p {
-    margin-bottom: 1rem;
-
-    a[href^="#"] {
-      text-decoration: none;
-
-      @media print {
-        display: none;
-      }
-    }
-  }
-
-  h2 {
-    margin-top: 2rem;
-  }
-
-  /* table of contents */
-  #contents ~ ol {
-    a {
-      text-decoration: none;
-    }
-  }
-
-  blockquote {
-    padding: 0.5rem 1rem;
-    margin: 0.8rem 0;
-    color: var(--color-text-weak);
-    border-left: 0.25rem solid var(--color-background-off2);
-
-    @media (min-width: 30em) {
-      padding-right: 5rem;
-      padding-left: 1.25rem;
-    }
-
-    p:last-child {
-      margin-bottom: 0;
-    }
-  }
-
-  ul,
-  ol {
-    padding-left: 2rem;
-
-    ul,
-    ol {
-      margin-top: .5rem;
-      padding-left: 1rem;
-    }
-  }
-
-  ol {
-    ol {
-      list-style-type: circle;
-    }
-  }
-
-  li {
-    margin-bottom: .5rem;
-
-    p {
-      margin: 0;
-    }
   }
 }
 
@@ -273,7 +242,7 @@ pre {
 code {
   white-space: nowrap;
   padding: 0.25em 0.5em;
-  font-size: 85%;
+  font-size: 75%;
   color: var(--color-text-code);
   background-color: var(--color-background-off1);
   border: 1px solid var(--color-background-off2);
@@ -282,8 +251,6 @@ code {
 pre {
   display: block;
   overflow: auto;
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
   padding: 1rem;
   font-size: 0.8rem;
   line-height: 1.4;

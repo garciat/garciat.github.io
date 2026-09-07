@@ -1,9 +1,7 @@
-import { helpers } from "deno-static/mod.ts";
-
 import { Post } from "../data.ts";
 import { paths } from "../paths.ts";
 
-import { GlobalFooter, PostDetails } from "./_components.tsx";
+import { GlobalFooter, PageNav, PostDetails } from "./_components.tsx";
 import { BaseLayout } from "./_layouts.tsx";
 import { CustomizedMarkdown } from "./_markdown.tsx";
 
@@ -17,20 +15,15 @@ export const PostPage: React.FC<PostPageProps> = ({ post }) => (
     title={post.meta.title}
     description={post.meta.description}
   >
-    <main className="post">
-      <header>
-        <div className="container">
-          <p className="print-hide">
-            <a href={helpers.url(paths.home())}>⇤ Back</a>
-          </p>
-          <h1>{post.meta.title}</h1>
-          <PostDetails post={post} />
-        </div>
-      </header>
-      <div className="content post-contents">
-        <CustomizedMarkdown>{post.body}</CustomizedMarkdown>
-      </div>
-      <GlobalFooter />
-    </main>
+    <PageNav />
+
+    <header>
+      <h1>{post.meta.title}</h1>
+      <PostDetails post={post} />
+    </header>
+
+    <CustomizedMarkdown>{post.body}</CustomizedMarkdown>
+
+    <GlobalFooter />
   </BaseLayout>
 );
