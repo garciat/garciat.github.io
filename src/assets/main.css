@@ -24,12 +24,10 @@ body {
 }
 
 html {
-  text-rendering: auto;
-  overflow-wrap: break-word;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
   background: var(--color-background);
   color: var(--color-text-main);
+  font-size: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -37,7 +35,7 @@ body {
   display: grid;
   grid-template-columns:
     minmax(1rem, 1fr) [text-start]
-    minmax(auto, 50rem) [text-end]
+    minmax(auto, 60rem) [text-end]
     minmax(1rem, 1fr);
   row-gap: 1rem;
   font-family:
@@ -50,8 +48,8 @@ body {
     sans-serif,
     Apple Color Emoji,
     Segoe UI Emoji;
-  font-weight: 350;
-  font-size: clamp(1em, 4vmin, 1.2em);
+  font-weight: 400;
+  font-size: 17px;
   line-height: 1.5;
 
   > * {
@@ -240,7 +238,6 @@ pre {
   font-family: Menlo, Monaco, "Courier New", monospace;
 }
 code {
-  white-space: nowrap;
   padding: 0.25em 0.5em;
   font-size: 75%;
   color: var(--color-text-code);
