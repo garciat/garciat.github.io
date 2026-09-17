@@ -1,7 +1,7 @@
 ---
-title: "My own functional SSG for Deno"
+title: "A functional SSG for Deno"
 date: 2026-09-06
-description: "Looking back at 16 years of GitHub gists."
+description: "I built a simple static site generator for Deno based on a simple recursive tree data structure."
 tags:
   - Deno
   - Web
